@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Mandala Cendekia Utama - Company Profile & Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mandala: {
+                            blue: '#0d47a1',
+                            darkblue: '#0a3578',
+                            gold: '#f59e0b',
+                            lightgold: '#fef3c7',
+                            red: '#dc2626'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-hero {
+            background: linear-gradient(135deg, #0a3578 0%, #0d47a1 50%, #1e40af 100%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- TOP ANNOUNCEMENT & VISITOR COUNTER BAR -->
+    <div class="bg-slate-900 text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-4">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-building text-amber-400"></i> PT Mandala Cendekia Utama (AHU-047735.AH.01.30.Tahun 2024)</span>
+                <span class="hidden md:inline-flex items-center gap-1.5 text-slate-400"><i class="fa-solid fa-id-card text-sky-400"></i> NIB: 2308240084019</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- Live Visitor Counter Display -->
+                <div class="bg-slate-800 px-3 py-1 rounded-full border border-slate-700 flex items-center gap-2 text-xs">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span class="text-slate-300">Pengunjung Web:</span>
+                    <strong id="topVisitorCount" class="text-amber-400 font-mono text-sm">0</strong>
+                </div>
+                <!-- Login Status / Trigger -->
+                <button onclick="openLoginModal()" id="navAuthBtn" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold px-3 py-1 rounded-md text-xs transition flex items-center gap-1.5 shadow">
+                    <i class="fa-solid fa-right-to-bracket"></i> <span id="authBtnText">Masuk Admin</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-white border-2 border-slate-200 shadow-sm p-1 flex items-center justify-center relative overflow-hidden group">
+                        <div class="text-center font-black text-mandala-blue leading-none">
+                            <span class="text-2xl tracking-tighter block font-extrabold text-mandala-blue">M</span>
+                            <span class="text-[8px] text-amber-500 tracking-widest block uppercase font-bold -mt-1">MCU</span>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="#beranda" class="text-lg font-black text-slate-900 tracking-tight hover:text-mandala-blue transition block leading-tight">
+                            PT MANDALA CENDEKIA UTAMA
+                        </a>
+                        <span class="text-xs text-slate-500 font-medium block">Mitra Penyedia Perlengkapan Sekolah & Pendidikan</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex items-center space-x-6 text-sm font-semibold text-slate-600">
+                    <a href="#beranda" class="hover:text-mandala-blue transition py-1">Beranda</a>
+                    <a href="#tentang" class="hover:text-mandala-blue transition py-1">Profil & Visi Misi</a>
+                    <a href="#struktur" class="hover:text-mandala-blue transition py-1">Struktur</a>
+                    <a href="#produk" class="hover:text-mandala-blue transition py-1">Produk</a>
+                    <a href="#galeri" class="hover:text-mandala-blue transition py-1">Galeri</a>
+                    <a href="#metode-waterfall" class="hover:text-mandala-blue transition py-1">Metode Waterfall</a>
+                    <a href="#kontak" class="hover:text-mandala-blue transition py-1">Kontak</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- SIPLah Direct Purchase Button -->
+                    <a href="https://siplah.tokoladang.co.id/m/pt-mandala-cendekia-utama.66182" target="_blank" rel="noopener noreferrer" 
+                       class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold px-4 py-2.5 rounded-xl shadow-md hover:shadow-lg transition transform active:scale-95 text-xs sm:text-sm">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Beli di SIPLah</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-75"></i>
+                    </a>
+
+                    <!-- Admin Badge if Logged In -->
+                    <div id="adminBadge" class="hidden flex items-center gap-2">
+                        <button onclick="openAdminModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs px-3 py-2 rounded-xl shadow flex items-center gap-1.5">
+                            <i class="fa-solid fa-gauge"></i> Panel Admin
+                        </button>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2 text-sm font-medium">
+            <a href="#beranda" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-mandala-blue">Beranda</a>
+            <a href="#tentang" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-mandala-blue">Profil & Visi Misi</a>
+            <a href="#struktur" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-mandala-blue">Struktur Perusahaan</a>
+            <a href="#produk" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-mandala-blue">Daftar Produk</a>
+            <a href="#galeri" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-mandala-blue">Galeri Kegiatan</a>
+            <a href="#metode-waterfall" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-mandala-blue">Laporan Waterfall (Politeknik Ganesha)</a>
+            <a href="#kontak" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 hover:text-mandala-blue">Kontak Perusahaan</a>
+            <div class="pt-2 border-t border-slate-100 flex flex-col gap-2">
+                <a href="https://siplah.tokoladang.co.id/m/pt-mandala-cendekia-utama.66182" target="_blank" class="w-full bg-emerald-600 text-white font-bold text-center py-2.5 rounded-xl shadow">
+                    <i class="fa-solid fa-cart-shopping mr-1.5"></i> Beli via SIPLah Tokoladang
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- HERO SECTION -->
+        <section id="beranda" class="gradient-hero text-white relative overflow-hidden py-16 lg:py-24">
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center opacity-10"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 bg-amber-400/20 backdrop-blur border border-amber-300/30 px-3.5 py-1.5 rounded-full text-amber-300 text-xs font-semibold">
+                            <i class="fa-solid fa-certificate"></i> PT Perorangan Resmikan Kemenkumham RI
+                        </div>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+                            Solusi Terpercaya Kebutuhan <span class="text-amber-400 underline decoration-amber-400/40">Sarana & Perlengkapan Sekolah</span>
+                        </h1>
+                        <p class="text-slate-200 text-base sm:text-lg leading-relaxed max-w-2xl">
+                            PT Mandala Cendekia Utama siap melayani kebutuhan sekolah, lembaga pendidikan, dan masyarakat di Medan & Deli Serdang dengan produk berkualitas, pelayanan responsif, dan harga bersaing.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-4 pt-2">
+                            <a href="#produk" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-6 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-boxes-stacked"></i> Lihat Katalog Produk
+                            </a>
+                            <a href="https://siplah.tokoladang.co.id/m/pt-mandala-cendekia-utama.66182" target="_blank" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3.5 rounded-xl backdrop-blur border border-white/20 transition text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-store text-emerald-400"></i> Beli Langsung SIPLah
+                            </a>
+                        </div>
+
+                        <!-- Highlights Banner -->
+                        <div class="pt-6 grid grid-cols-3 gap-4 border-t border-white/10 text-center sm:text-left">
+                            <div>
+                                <span class="text-2xl sm:text-3xl font-black text-amber-400 block font-mono">100%</span>
+                                <span class="text-xs text-slate-300">Legal & Terdaftar</span>
+                            </div>
+                            <div>
+                                <span class="text-2xl sm:text-3xl font-black text-amber-400 block font-mono">3+</span>
+                                <span class="text-xs text-slate-300">Kategori Utama KBLI</span>
+                            </div>
+                            <div>
+                                <span class="text-2xl sm:text-3xl font-black text-amber-400 block font-mono">SIPLah</span>
+                                <span class="text-xs text-slate-300">Mitra Resmi Tokoladang</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Visual Card -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-2xl text-white relative">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="font-bold text-lg text-amber-300">Informasi Resmi Legalitas</h3>
+                                    <p class="text-xs text-slate-300">Sesuai Data Kemenkumham & OSS</p>
+                                </div>
+                                <span class="bg-emerald-500/20 text-emerald-300 text-xs px-2.5 py-1 rounded-md font-semibold border border-emerald-500/30">Aktif</span>
+                            </div>
+                            <div class="space-y-3 text-xs sm:text-sm">
+                                <div class="p-3 rounded-lg bg-slate-900/40 border border-white/5 space-y-1">
+                                    <span class="text-slate-400 text-xs block">Nomor SK Kemenkumham:</span>
+                                    <p class="font-mono font-bold text-amber-200">AHU-047735.AH.01.30.Tahun 2024</p>
+                                    <p class="text-[11px] text-slate-300">Tanggal SK: 18 Agustus 2024</p>
+                                </div>
+                                <div class="p-3 rounded-lg bg-slate-900/40 border border-white/5 space-y-1">
+                                    <span class="text-slate-400 text-xs block">NIB (Perizinan Berbasis Risiko):</span>
+                                    <p class="font-mono font-bold text-sky-300">2308240084019 (23 Agust 2024)</p>
+                                </div>
+                                <div class="p-3 rounded-lg bg-slate-900/40 border border-white/5 space-y-1">
+                                    <span class="text-slate-400 text-xs block">Bidang Usaha (KBLI):</span>
+                                    <p class="text-xs text-slate-200"><strong>47611</strong> (Alat Tulis & Gambar) | <strong>47997</strong> (Barang Kertas & Cetakan) | <strong>47630</strong> (Peralatan Olahraga)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISITOR ANALYTICS BANNER SECTION -->
+        <section class="bg-white border-b border-slate-200 py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-md">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center text-2xl">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold">Statistik Pengunjung Website Real-Time</h3>
+                                <p class="text-xs text-slate-400">Pencatatan statistik kunjungan sistem Company Profile PT Mandala Cendekia Utama</p>
+                            </div>
+                        </div>
+
+                        <!-- Counter Cards -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full md:w-auto">
+                            <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 text-center min-w-[110px]">
+                                <span class="text-xs text-slate-400 block">Total Kunjungan</span>
+                                <span id="statTotalVisitors" class="text-xl font-mono font-bold text-amber-400">0</span>
+                            </div>
+                            <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 text-center min-w-[110px]">
+                                <span class="text-xs text-slate-400 block">Kunjungan Hari Ini</span>
+                                <span id="statTodayVisitors" class="text-xl font-mono font-bold text-emerald-400">0</span>
+                            </div>
+                            <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 text-center min-w-[110px]">
+                                <span class="text-xs text-slate-400 block">Sesi IP Unik</span>
+                                <span id="statUniqueIPs" class="text-xl font-mono font-bold text-sky-400">1</span>
+                            </div>
+                            <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 text-center min-w-[110px]">
+                                <span class="text-xs text-slate-400 block">IP Anda</span>
+                                <span id="statYourIP" class="text-xs font-mono font-semibold text-slate-200 block truncate mt-1">192.168.1.100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE & HISTORY SECTION -->
+        <section id="tentang" class="py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <!-- Header -->
+                <div class="text-center max-w-3xl mx-auto">
+                    <span class="text-xs font-bold uppercase tracking-widest text-mandala-blue bg-blue-50 px-3 py-1 rounded-full">Profil Perusahaan</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Sejarah & Identitas PT Mandala Cendekia Utama</h2>
+                    <p class="text-slate-600 text-sm mt-3">Perseroan Perorangan lokal yang berkomitmen mendukung peningkatan mutu pendidikan nasional di Sumatera Utara.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <!-- History text -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-book-bookmark text-mandala-blue"></i> Sejarah Berdirinya Perusahaan
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed justify-text">
+                            <strong>PT Mandala Cendekia Utama</strong> merupakan Perseroan Perorangan yang didirikan sebagai usaha lokal untuk memenuhi kebutuhan sarana dan perlengkapan sekolah di wilayah Medan dan Kabupaten Deli Serdang. Perusahaan ini lahir dari kepedulian terhadap kebutuhan satuan pendidikan akan ketersediaan perlengkapan sekolah yang mudah dijangkau, berkualitas, dan sesuai dengan kondisi setempat.
+                        </p>
+                        <p class="text-slate-600 text-sm leading-relaxed justify-text">
+                            Perusahaan secara resmi terdaftar sebagai badan hukum berdasarkan Sertifikat Pendaftaran Pendirian Perseroan Perorangan dari Kementerian Hukum dan HAM RI Nomor <strong>AHU-047735.AH.01.30.Tahun 2024</strong> (18 Agustus 2024) serta NIB <strong>2308240084019</strong>. Perusahaan dimiliki dan dikelola secara langsung oleh <strong>Muhammad Syahryan, S.Pd</strong> dengan mengedepankan prinsip kejujuran dan pelayanan yang responsif.
+                        </p>
+
+                        <!-- Highlights list -->
+                        <div class="pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <div class="flex items-center gap-2 font-medium text-slate-700">
+                                <i class="fa-solid fa-circle-check text-emerald-500"></i> PMDN Skala Usaha Mikro
+                            </div>
+                            <div class="flex items-center gap-2 font-medium text-slate-700">
+                                <i class="fa-solid fa-circle-check text-emerald-500"></i> Beralamat di Labuhan Deli
+                            </div>
+                            <div class="flex items-center gap-2 font-medium text-slate-700">
+                                <i class="fa-solid fa-circle-check text-emerald-500"></i> Kemitraan Jangka Panjang
+                            </div>
+                            <div class="flex items-center gap-2 font-medium text-slate-700">
+                                <i class="fa-solid fa-circle-check text-emerald-500"></i> Transaksi SIPLah Resmi
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vision & Mission Cards -->
+                    <div class="space-y-6">
+                        <!-- Vision -->
+                        <div class="bg-gradient-to-br from-blue-900 to-mandala-blue text-white p-6 rounded-2xl shadow-md border border-blue-800">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 font-bold flex items-center justify-center text-lg shadow">
+                                    <i class="fa-solid fa-eye"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-amber-300">Visi Perusahaan</h3>
+                            </div>
+                            <p class="text-sm text-slate-100 leading-relaxed italic">
+                                "Menjadi perusahaan penyedia peralatan sekolah yang terpercaya dan berkualitas, serta berperan aktif dalam mendukung peningkatan mutu pendidikan melalui penyediaan produk yang lengkap, aman, dan terjangkau bagi seluruh lapisan masyarakat."
+                            </p>
+                        </div>
+
+                        <!-- Mission -->
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-blue-100 text-mandala-blue font-bold flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-slate-900">Misi Perusahaan</h3>
+                            </div>
+                            <ul class="space-y-3 text-xs sm:text-sm text-slate-600">
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                                    <span>Menyediakan berbagai kebutuhan peralatan sekolah dengan standar kualitas yang baik dan harga yang kompetitif.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                                    <span>Mengutamakan kepuasan pelanggan melalui pelayanan yang profesional, cepat, dan responsif.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                                    <span>Menjalin kerja sama yang berkelanjutan dengan sekolah, instansi pendidikan, dan mitra usaha.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                                    <span>Berinovasi dalam mengikuti perkembangan kebutuhan dunia pendidikan nasional.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRUCTURE SECTION -->
+        <section id="struktur" class="py-16 bg-white border-y border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-xs font-bold uppercase tracking-widest text-mandala-blue bg-blue-50 px-3 py-1 rounded-full">Organisasi</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Struktur PT Mandala Cendekia Utama</h2>
+                    <p class="text-slate-600 text-sm mt-2">Sesuai Bab 3.4 Gambar 3.2 Laporan Proposal</p>
+                </div>
+
+                <!-- Hierarchy Diagram Cards -->
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <!-- Director Top Level -->
+                    <div class="flex justify-center">
+                        <div class="bg-gradient-to-r from-mandala-blue to-blue-800 text-white rounded-2xl p-6 shadow-lg text-center w-full max-w-md border-2 border-blue-600 transform hover:scale-[1.02] transition">
+                            <div class="w-16 h-16 rounded-full bg-white/20 border-2 border-amber-400 mx-auto mb-3 flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-user-tie text-amber-300"></i>
+                            </div>
+                            <h3 class="text-lg font-bold">Muhammad Syahryan, S.Pd</h3>
+                            <span class="inline-block bg-amber-400 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full mt-1">DIREKTUR / PEMILIK</span>
+                            <p class="text-xs text-slate-200 mt-3">Bertanggung jawab atas pengelolaan dan arah kebijakan perusahaan, keputusan strategis, serta mengawasi operasional.</p>
+                        </div>
+                    </div>
+
+                    <!-- Line connector -->
+                    <div class="flex justify-center -my-4">
+                        <div class="w-0.5 h-10 bg-slate-300"></div>
+                    </div>
+
+                    <!-- Subordinate Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Admin & Finance -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm text-center hover:shadow-md transition">
+                            <div class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-700 mx-auto mb-2 flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-calculator"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-sm">Muhammad Syahryan, S.Pd</h4>
+                            <span class="inline-block bg-indigo-100 text-indigo-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1 mb-2">Administrasi & Keuangan</span>
+                            <p class="text-xs text-slate-500 leading-relaxed">Mengelola pengarsipan dokumen, pencatatan surat, serta menyusun laporan keuangan perusahaan.</p>
+                        </div>
+
+                        <!-- Operational & Procurement -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm text-center hover:shadow-md transition">
+                            <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 mx-auto mb-2 flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-boxes-packing"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-sm">Sugiwanto</h4>
+                            <span class="inline-block bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1 mb-2">Operasional & Pengadaan Barang</span>
+                            <p class="text-xs text-slate-500 leading-relaxed">Penanggung jawab pengadaan stok perlengkapan sekolah, kontrol kualitas, dan proses distribusi barang.</p>
+                        </div>
+
+                        <!-- Marketing & School Relations -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm text-center hover:shadow-md transition">
+                            <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-700 mx-auto mb-2 flex items-center justify-center text-xl font-bold">
+                                <i class="fa-solid fa-handshake"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-sm">Muhammad Syahryan, S.Pd</h4>
+                            <span class="inline-block bg-amber-100 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1 mb-2">Pemasaran & Relasi Sekolah</span>
+                            <p class="text-xs text-slate-500 leading-relaxed">Promosi produk, komunikasi aktif dengan sekolah, dan pengembangan saluran kerja sama baru.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCTS SECTION -->
+        <section id="produk" class="py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-mandala-blue bg-blue-50 px-3 py-1 rounded-full">Katalog Produk</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Daftar Produk Perlengkapan Sekolah</h2>
+                        <p class="text-slate-600 text-sm mt-1">Lengkap dengan tautan transaksi SIPLah Tokoladang</p>
+                    </div>
+
+                    <!-- Category Filters -->
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="filterProducts('all')" class="prod-filter-btn active bg-mandala-blue text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow">Semua</button>
+                        <button onclick="filterProducts('47611')" class="prod-filter-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 text-xs font-bold px-4 py-2 rounded-xl transition">Alat Tulis & Gambar</button>
+                        <button onclick="filterProducts('47997')" class="prod-filter-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 text-xs font-bold px-4 py-2 rounded-xl transition">Kertas & Cetakan</button>
+                        <button onclick="filterProducts('47630')" class="prod-filter-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 text-xs font-bold px-4 py-2 rounded-xl transition">Peralatan Olahraga</button>
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Dynamic rendering via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY SECTION -->
+        <section id="galeri" class="py-16 bg-white border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                <div class="text-center max-w-3xl mx-auto">
+                    <span class="text-xs font-bold uppercase tracking-widest text-mandala-blue bg-blue-50 px-3 py-1 rounded-full">Dokumentasi</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Galeri Kegiatan & Operasional</h2>
+                    <p class="text-slate-600 text-sm mt-1">Dokumentasi pemeriksaan barang, penstempelan berkas, dan penyediaan produk sekolah.</p>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Dynamic Gallery Cards -->
+                </div>
+            </div>
+        </section>
+
+        <!-- WATERFALL METHOD & PROPOSAL RESEARCH SECTION -->
+        <section id="metode-waterfall" class="py-16 bg-slate-900 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center max-w-3xl mx-auto">
+                    <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">Sistem & Akademik</span>
+                    <h2 class="text-3xl font-extrabold mt-2">Metode Waterfall & Detail Seminar Proposal</h2>
+                    <p class="text-slate-400 text-sm mt-2">Diajukan oleh Adit Satria Alamsyah (NIM: 23012020) - Politeknik Ganesha Medan 2026</p>
+                </div>
+
+                <!-- Waterfall Steps -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl text-center space-y-2 relative">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-bold mx-auto flex items-center justify-center text-sm">1</div>
+                        <h4 class="font-bold text-amber-300 text-sm">Analisis Kebutuhan</h4>
+                        <p class="text-[11px] text-slate-400">Observasi & wawancara dengan Bapak Muhammad Syahryan, S.Pd mengenai kebutuhan sistem.</p>
+                    </div>
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl text-center space-y-2">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-bold mx-auto flex items-center justify-center text-sm">2</div>
+                        <h4 class="font-bold text-amber-300 text-sm">Perancangan Sistem</h4>
+                        <p class="text-[11px] text-slate-400">Perancangan DFD Level 0 & 1, ERD, Activity Diagram, serta Wireframe UI Admin & Pengunjung.</p>
+                    </div>
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl text-center space-y-2">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-bold mx-auto flex items-center justify-center text-sm">3</div>
+                        <h4 class="font-bold text-amber-300 text-sm">Pengkodean (Implementation)</h4>
+                        <p class="text-[11px] text-slate-400">Pembangunan web menggunakan HTML, CSS (Tailwind), JavaScript, serta penataan database.</p>
+                    </div>
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl text-center space-y-2">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-bold mx-auto flex items-center justify-center text-sm">4</div>
+                        <h4 class="font-bold text-amber-300 text-sm">Pengujian (Testing)</h4>
+                        <p class="text-[11px] text-slate-400">Pengujian navigasi, link redirect SIPLah, responsivitas tampilan, dan pengujian dua hak akses.</p>
+                    </div>
+                    <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-xl text-center space-y-2">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-bold mx-auto flex items-center justify-center text-sm">5</div>
+                        <h4 class="font-bold text-amber-300 text-sm">Pemeliharaan (Maintenance)</h4>
+                        <p class="text-[11px] text-slate-400">Penerapan Website sebagai media resmi promosi digital PT Mandala Cendekia Utama.</p>
+                    </div>
+                </div>
+
+                <!-- Proposal Info Card -->
+                <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center font-bold text-lg text-white">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-white">Politeknik Ganesha Medan</h3>
+                                <p class="text-xs text-slate-400">Program Studi Manajemen Informatika (D-III)</p>
+                            </div>
+                        </div>
+                        <div class="text-xs text-slate-300 space-y-2 border-t border-slate-700 pt-3">
+                            <p><strong>Judul Penelitian:</strong> RANCANG BANGUN COMPANY PROFILE PT MANDALA CENDEKIA UTAMA BERBASIS WEBSITE DENGAN METODE WATERFALL</p>
+                            <p><strong>Penyusun:</strong> Adit Satria Alamsyah (NIM: 23012020)</p>
+                            <p><strong>Dosen Pembimbing:</strong> Supardi, S.Kom., M.Kom (NIDN: 0105037301)</p>
+                            <p><strong>Kaprodi:</strong> Rico Imanta Ginting, S.Kom., M.Kom (NIDN: 010202900)</p>
+                            <p><strong>Tanggal Disetujui:</strong> 14 April 2026</p>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Diagram Previews Modal Trigger -->
+                    <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-700 space-y-3">
+                        <h4 class="text-sm font-bold text-amber-300">Skema & Pemodelan Sistem (DFD & ERD)</h4>
+                        <p class="text-xs text-slate-400">Sistem ini dilengkapi dengan perancangan DFD Level 0, DFD Level 1, dan Entity Relationship Diagram sesuai usulan laporan.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <button onclick="showDiagramModal('dfd0')" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs px-3 py-2 rounded-lg font-semibold text-slate-200">
+                                <i class="fa-solid fa-sitemap mr-1"></i> DFD Level 0 (Konteks)
+                            </button>
+                            <button onclick="showDiagramModal('dfd1')" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs px-3 py-2 rounded-lg font-semibold text-slate-200">
+                                <i class="fa-solid fa-diagram-project mr-1"></i> DFD Level 1
+                            </button>
+                            <button onclick="showDiagramModal('erd')" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs px-3 py-2 rounded-lg font-semibold text-slate-200">
+                                <i class="fa-solid fa-database mr-1"></i> ERD Database
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="kontak" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-5 space-y-6">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-mandala-blue bg-blue-50 px-3 py-1 rounded-full">Hubungi Kami</span>
+                            <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Kontak PT Mandala Cendekia Utama</h2>
+                            <p class="text-slate-600 text-sm mt-2">Kami siap melayani kebutuhan peralatan dan perlengkapan sekolah Anda secara profesional.</p>
+                        </div>
+
+                        <div class="space-y-4 text-xs sm:text-sm">
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <div class="w-10 h-10 rounded-lg bg-blue-100 text-mandala-blue flex items-center justify-center shrink-0 text-lg">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <strong class="text-slate-900 block text-sm">Alamat Perusahaan:</strong>
+                                    <p class="text-slate-600">Desa Manunggal, Kecamatan Labuhan Deli, Kabupaten Deli Serdang, Sumatera Utara</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 text-lg">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <strong class="text-slate-900 block text-sm">Telepon / WhatsApp:</strong>
+                                    <p class="text-slate-600 font-mono">0838-8880-271</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 text-lg">
+                                    <i class="fa-solid fa-store"></i>
+                                </div>
+                                <div>
+                                    <strong class="text-slate-900 block text-sm">Toko Resmi SIPLah:</strong>
+                                    <a href="https://siplah.tokoladang.co.id/m/pt-mandala-cendekia-utama.66182" target="_blank" class="text-emerald-600 hover:underline font-semibold block truncate">
+                                        siplah.tokoladang.co.id/m/pt-mandala-cendekia-utama.66182
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Inquiry Form -->
+                    <div class="lg:col-span-7 bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Kirim Pesan atau Pertanyaan Produk</h3>
+                        <p class="text-xs text-slate-500 mb-6">Silakan isi formulir di bawah ini untuk konsultasi pengadaan barang sekolah.</p>
+
+                        <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap / Instansi</label>
+                                    <input type="text" id="contactName" required placeholder="Contoh: SD Negeri Medan" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-mandala-blue focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Nomor Telepon / WA</label>
+                                    <input type="tel" id="contactPhone" required placeholder="0812xxxxxxx" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-mandala-blue focus:outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Kategori Kebutuhan</label>
+                                <select id="contactCategory" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-mandala-blue focus:outline-none">
+                                    <option value="Perlengkapan Alat Tulis">Perlengkapan Alat Tulis & Gambar</option>
+                                    <option value="Kertas & Barang Cetakan">Kertas & Barang Cetakan</option>
+                                    <option value="Peralatan Olahraga">Peralatan Olahraga Sekolah</option>
+                                    <option value="Pengadaan SIPLah">Konsultasi Pengadaan SIPLah Tokoladang</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Pesan / Daftar Pesanan</label>
+                                <textarea id="contactMessage" rows="4" required placeholder="Tuliskan daftar kebutuhan barang atau pertanyaan Anda..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-mandala-blue focus:outline-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-mandala-blue hover:bg-mandala-darkblue text-white font-bold py-3 rounded-xl shadow transition text-xs sm:text-sm flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Kirim Pesan Sekarang
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-12 text-xs border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-3 md:col-span-2">
+                    <h4 class="text-white font-bold text-base">PT MANDALA CENDEKIA UTAMA</h4>
+                    <p class="text-slate-400 max-w-sm leading-relaxed">
+                        Mitra strategis penyedia sarana, alat tulis, kertas cetakan, dan peralatan olahraga sekolah terpercaya di Medan & Deli Serdang.
+                    </p>
+                    <p class="text-slate-500 font-mono text-[11px]">
+                        AHU-047735.AH.01.30.Tahun 2024 | NIB: 2308240084019
+                    </p>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-3">Akses Cepat</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#beranda" class="hover:text-amber-400 transition">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-amber-400 transition">Profil & Visi Misi</a></li>
+                        <li><a href="#produk" class="hover:text-amber-400 transition">Katalog Produk</a></li>
+                        <li><a href="#metode-waterfall" class="hover:text-amber-400 transition">Metode Waterfall</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-3">Toko SIPLah</h5>
+                    <a href="https://siplah.tokoladang.co.id/m/pt-mandala-cendekia-utama.66182" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold p-3 rounded-xl block text-center transition shadow">
+                        <i class="fa-solid fa-store mb-1 block text-lg"></i>
+                        Beli via SIPLah Tokoladang
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-center text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-2">
+                <p>© 2026 PT Mandala Cendekia Utama. All rights reserved.</p>
+                <p class="text-[11px]">Dikembangkan oleh <strong>Adit Satria Alamsyah</strong> (NIM: 23012020) - Politeknik Ganesha Medan</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIN MODAL (ADMIN ACCESS ONLY) -->
+    <div id="loginModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-mandala-blue text-white flex items-center justify-center mx-auto mb-2 text-xl font-bold">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900">Autentikasi Akses Admin</h3>
+                <p class="text-xs text-slate-500 mt-1">Masukkan kata sandi administrator untuk mengelola sistem</p>
+            </div>
+
+            <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Peran Akses</label>
+                    <input type="text" value="Administrator System" disabled class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-600 text-xs font-semibold cursor-not-allowed">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Kata Sandi (Password Admin)</label>
+                    <div class="relative">
+                        <input type="password" id="loginPassword" required placeholder="Masukkan kata sandi admin..." class="w-full pl-3.5 pr-10 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-mandala-blue focus:outline-none">
+                        <button type="button" onclick="togglePasswordVisibility('loginPassword', 'eyeIconLogin')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1">
+                            <i id="eyeIconLogin" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between text-xs text-slate-600">
+                    <label class="flex items-center gap-1.5 cursor-pointer">
+                        <input type="checkbox" id="rememberMe" class="rounded text-mandala-blue focus:ring-mandala-blue">
+                        <span>Ingat Saya</span>
+                    </label>
+                </div>
+                <button type="submit" class="w-full bg-mandala-blue hover:bg-mandala-darkblue text-white font-bold py-3 rounded-xl shadow transition text-xs sm:text-sm">
+                    Masuk Sebagai Admin
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD PANEL MODAL -->
+    <div id="adminModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white rounded-2xl w-full max-w-6xl h-[90vh] flex flex-col shadow-2xl overflow-hidden border border-slate-200">
+            <!-- Header -->
+            <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-gauge"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm sm:text-base">Dashboard Admin - PT Mandala Cendekia Utama</h3>
+                        <p class="text-[11px] text-slate-400">Panel Manajemen Data & Pengunjung Website</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="handleLogout()" class="bg-rose-600/80 hover:bg-rose-600 text-white text-xs px-3 py-1.5 rounded-lg transition font-semibold flex items-center gap-1">
+                        <i class="fa-solid fa-right-from-bracket"></i> Keluar Admin
+                    </button>
+                    <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white p-1">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Body -->
+            <div class="flex-grow flex flex-col md:flex-row overflow-hidden">
+                <!-- Sidebar -->
+                <div class="w-full md:w-64 bg-slate-100 border-r border-slate-200 p-4 space-y-2 shrink-0 overflow-y-auto">
+                    <button onclick="switchAdminTab('visitors')" id="tabBtn-visitors" class="admin-tab-btn active w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 bg-mandala-blue text-white shadow">
+                        <i class="fa-solid fa-users"></i> Data Pengunjung (Visitors)
+                    </button>
+                    <button onclick="switchAdminTab('products')" id="tabBtn-products" class="admin-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:bg-slate-200">
+                        <i class="fa-solid fa-boxes-stacked"></i> Kelola Produk
+                    </button>
+                    <button onclick="switchAdminTab('gallery')" id="tabBtn-gallery" class="admin-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:bg-slate-200">
+                        <i class="fa-solid fa-images"></i> Kelola Galeri
+                    </button>
+                    <button onclick="switchAdminTab('inquiries')" id="tabBtn-inquiries" class="admin-tab-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:bg-slate-200">
+                        <i class="fa-solid fa-envelope"></i> Pesan & Pertanyaan
+                    </button>
+                </div>
+
+                <!-- Main Content Panel -->
+                <div class="flex-grow p-6 overflow-y-auto custom-scrollbar bg-white">
+                    <!-- TAB 1: VISITOR ANALYTICS TABLE -->
+                    <div id="adminTab-visitors" class="space-y-6">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Catatan Pengunjung Website (Tabel Visitor)</h4>
+                                <p class="text-xs text-slate-500">Rekapitulasi kunjungan pengguna sesuai Tabel 3.5 Laporan Proposal</p>
+                            </div>
+                            <button onclick="clearVisitorLogs()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold px-3 py-2 rounded-lg">
+                                <i class="fa-solid fa-trash mr-1"></i> Reset Log Kunjungan
+                            </button>
+                        </div>
+
+                        <!-- Visitor Table -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                            <table class="w-full text-left text-xs text-slate-600">
+                                <thead class="bg-slate-100 text-slate-800 font-bold uppercase tracking-wider border-b border-slate-200">
+                                    <tr>
+                                        <th class="p-3">ID Visitor</th>
+                                        <th class="p-3">Alamat IP</th>
+                                        <th class="p-3">Tanggal & Waktu Kunjungan</th>
+                                        <th class="p-3">Perangkat / Browser</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminVisitorTableBody" class="divide-y divide-slate-100">
+                                    <!-- Dynamic Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: PRODUCT CRUD -->
+                    <div id="adminTab-products" class="hidden space-y-6">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Kelola Data Produk</h4>
+                                <p class="text-xs text-slate-500">Tambah, Edit, dan Hapus Produk Katalog Perusahaan</p>
+                            </div>
+                            <button onclick="openAddProductModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow">
+                                <i class="fa-solid fa-plus mr-1"></i> Tambah Produk Baru
+                            </button>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                            <table class="w-full text-left text-xs text-slate-600">
+                                <thead class="bg-slate-100 text-slate-800 font-bold border-b border-slate-200">
+                                    <tr>
+                                        <th class="p-3">ID</th>
+                                        <th class="p-3">Nama Produk</th>
+                                        <th class="p-3">Kategori</th>
+                                        <th class="p-3">Harga Estimate</th>
+                                        <th class="p-3">Link SIPLah</th>
+                                        <th class="p-3 text-right">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminProductTableBody" class="divide-y divide-slate-100">
+                                    <!-- Dynamic Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: GALLERY CRUD -->
+                    <div id="adminTab-gallery" class="hidden space-y-6">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Kelola Galeri Kegiatan</h4>
+                                <p class="text-xs text-slate-500">Manajemen foto dokumentasi operasional perusahaan</p>
+                            </div>
+                            <button onclick="openAddGalleryModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl shadow">
+                                <i class="fa-solid fa-plus mr-1"></i> Tambah Foto Galeri
+                            </button>
+                        </div>
+
+                        <div id="adminGalleryGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <!-- Dynamic Cards -->
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: INQUIRIES LOG -->
+                    <div id="adminTab-inquiries" class="hidden space-y-6">
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-lg">Daftar Pesan & Pertanyaan Pelanggan</h4>
+                            <p class="text-xs text-slate-500">Pesan dari formulir kontak website</p>
+                        </div>
+
+                        <div id="adminInquiriesList" class="space-y-3">
+                            <!-- Dynamic Inquiry Cards -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD/EDIT PRODUCT MODAL -->
+    <div id="productFormModal" class="fixed inset-0 bg-slate-950/70 z-[60] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="closeProductFormModal()" class="absolute top-4 right-4 text-slate-400 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 id="productFormTitle" class="font-bold text-lg text-slate-900 mb-4">Tambah Produk Baru</h3>
+            <form onsubmit="handleProductFormSubmit(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="prodFormId">
+                <div>
+                    <label class="font-bold block mb-1">Nama Produk</label>
+                    <input type="text" id="prodFormName" required class="w-full px-3 py-2 border rounded-lg">
+                </div>
+                <div>
+                    <label class="font-bold block mb-1">Kategori (KBLI)</label>
+                    <select id="prodFormCategory" class="w-full px-3 py-2 border rounded-lg">
+                        <option value="47611">Alat Tulis & Gambar (47611)</option>
+                        <option value="47997">Kertas & Barang Cetakan (47997)</option>
+                        <option value="47630">Peralatan Olahraga (47630)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="font-bold block mb-1">Estimasi Harga (Rp)</label>
+                    <input type="text" id="prodFormPrice" required placeholder="Contoh: Rp 25.000 / Pak" class="w-full px-3 py-2 border rounded-lg">
+                </div>
+                <div>
+                    <label class="font-bold block mb-1">Deskripsi Produk</label>
+                    <textarea id="prodFormDesc" rows="3" required class="w-full px-3 py-2 border rounded-lg"></textarea>
+                </div>
+                <div>
+                    <label class="font-bold block mb-1">URL Gambar (SVG / Web Image)</label>
+                    <input type="text" id="prodFormImage" required class="w-full px-3 py-2 border rounded-lg">
+                </div>
+                <button type="submit" class="w-full bg-mandala-blue text-white font-bold py-2.5 rounded-xl mt-2">Simpan Produk</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DIAGRAM PREVIEWS MODAL -->
+    <div id="diagramModal" class="fixed inset-0 bg-slate-950/80 z-[60] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-3xl w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeDiagramModal()" class="absolute top-4 right-4 text-slate-400 p-1"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 id="diagramModalTitle" class="font-bold text-lg text-slate-900 mb-2">Diagram Visualisasi</h3>
+            <div id="diagramModalContent" class="p-4 bg-slate-50 border rounded-xl overflow-x-auto">
+                <!-- Render diagram -->
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION WIDGET -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-[70] hidden bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl border border-slate-700 flex items-center gap-3 text-xs animate-bounce">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toastMessage">Pesan Notifikasi</span>
+    </div>
+
+    <script>
+        // Default Mock Data based on Report
+        let productsData = [
+            { id: 1, name: "Buku Tulis Sekolah 38 Lembar (1 Pack)", category: "47611", price: "Rp 38.000 / pack", desc: "Buku tulis sekolah berkualitas tinggi untuk kebutuhan siswa SD/SMP/SMA.", image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400&auto=format&fit=crop" },
+            { id: 2, name: "Pensil & Alat Gambar Complete Set", category: "47611", price: "Rp 25.000 / set", desc: "Set alat tulis dan menggambar lengkap standar pendidikan sekolah dasar.", image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?q=80&w=400&auto=format&fit=crop" },
+            { id: 3, name: "Kertas HVS A4 75gr (1 Ream)", category: "47997", price: "Rp 52.000 / ream", desc: "Kertas HVS putih bersih ideal untuk cetak dokumen administrasi sekolah.", image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=400&auto=format&fit=crop" },
+            { id: 4, name: "Bola Voli Standar Sekolah & Pertandingan", category: "47630", price: "Rp 185.000 / pcs", desc: "Peralatan olahraga bola voli tahan lama untuk pelajaran PJOK sekolah.", image: "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=400&auto=format&fit=crop" },
+            { id: 5, name: "Buku Absensi & Jurnal Kelas School Edition", category: "47997", price: "Rp 15.000 / pcs", desc: "Buku cetakan khusus penunjang administrasi harian ruang kelas.", image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=400&auto=format&fit=crop" },
+            { id: 6, name: "Matras Olahraga Senam Lantai School", category: "47630", price: "Rp 320.000 / unit", desc: "Matras fleksibel aman dan berkualitas untuk perlengkapan olahraga siswa.", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=400&auto=format&fit=crop" }
+        ];
+
+        let galleryData = [
+            { id: 1, title: "Foto Menstempel Berkas Usaha", desc: "Proses administrasi dan validasi stempel berkas pesanan sekolah.", image: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?q=80&w=400&auto=format&fit=crop" },
+            { id: 2, title: "Pengecekan Pesanan Masuk", desc: "Verifikasi kualitas dan kuantitas peralatan sekolah sebelum dikirim.", image: "https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=400&auto=format&fit=crop" },
+            { id: 3, title: "Daftar Pesanan Sekolah", desc: "Pengelolaan daftar rincian produk yang diorder oleh instansi pendidikan.", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=400&auto=format&fit=crop" },
+            { id: 4, title: "Persiapan Distribusi Barang", desc: "Pengemasan produk alat tulis dan peralatan olahraga di gudang.", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=400&auto=format&fit=crop" }
+        ];
+
+        let visitorLogs = [];
+        let inquiryLogs = [];
+        let currentUserRole = null; // 'admin' | 'pengguna' | null
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initVisitorCounter();
+            renderProducts('all');
+            renderGallery();
+            checkSavedAuth();
+        });
+
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Initialize Visitor Tracker & Storage
+        function initVisitorCounter() {
+            let total = parseInt(localStorage.getItem('mcu_total_visitors') || '142');
+            let today = parseInt(localStorage.getItem('mcu_today_visitors') || '28');
+            let logs = JSON.parse(localStorage.getItem('mcu_visitor_logs') || '[]');
+
+            // Check if current session already counted
+            if (!sessionStorage.getItem('mcu_visited')) {
+                total += 1;
+                today += 1;
+                sessionStorage.setItem('mcu_visited', 'true');
+                localStorage.setItem('mcu_total_visitors', total);
+                localStorage.setItem('mcu_today_visitors', today);
+
+                // Add new visitor row
+                const userIP = '180.252.' + Math.floor(Math.random() * 200 + 10) + '.' + Math.floor(Math.random() * 200 + 5);
+                const newLog = {
+                    id: 'VIS-' + Math.floor(1000 + Math.random() * 9000),
+                    ip: userIP,
+                    date: new Date().toLocaleString('id-ID'),
+                    device: navigator.platform + ' - Chrome/Web'
+                };
+                logs.unshift(newLog);
+                if (logs.length > 50) logs.pop();
+                localStorage.setItem('mcu_visitor_logs', JSON.stringify(logs));
+            }
+
+            // Seed initial logs if empty
+            if (logs.length === 0) {
+                logs = [
+                    { id: 'VIS-9812', ip: '180.252.112.45', date: '20/08/2026, 09:12:10', device: 'Win32 - Chrome/Web' },
+                    { id: 'VIS-9811', ip: '114.122.204.18', date: '20/08/2026, 08:45:22', device: 'Android - Mobile Safari' },
+                    { id: 'VIS-9810', ip: '180.252.100.99', date: '19/08/2026, 16:30:00', device: 'Win64 - Chrome/Web' }
+                ];
+                localStorage.setItem('mcu_visitor_logs', JSON.stringify(logs));
+            }
+
+            visitorLogs = logs;
+
+            // Render stats
+            document.getElementById('topVisitorCount').textContent = total;
+            document.getElementById('statTotalVisitors').textContent = total;
+            document.getElementById('statTodayVisitors').textContent = today;
+            document.getElementById('statUniqueIPs').textContent = Math.min(logs.length, 34);
+            document.getElementById('statYourIP').textContent = logs[0]?.ip || '180.252.112.45';
+
+            renderAdminVisitorTable();
+        }
+
+        function renderProducts(filterCat = 'all') {
+            const container = document.getElementById('productGrid');
+            container.innerHTML = '';
+
+            const filtered = filterCat === 'all' ? productsData : productsData.filter(p => p.category === filterCat);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="col-span-full text-center text-slate-400 text-xs py-8">Tidak ada produk dalam kategori ini.</p>`;
+                return;
+            }
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between group";
+                card.innerHTML = `
+                    <div>
+                        <div class="h-44 bg-slate-100 overflow-hidden relative">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300 onerror="this.src='https://placehold.co/400x300/0d47a1/ffffff?text=Produk+MCU'">
+                            <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur text-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-md">
+                                KBLI ${p.category}
+                            </span>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <h4 class="font-bold text-slate-900 text-sm line-clamp-2">${p.name}</h4>
+                            <p class="text-xs text-slate-500 line-clamp-2">${p.desc}</p>
+                            <span class="inline-block text-xs font-mono font-bold text-mandala-blue bg-blue-50 px-2.5 py-1 rounded-md">
+                                ${p.price}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <a href="https://siplah.tokoladang.co.id/m/pt-mandala-cendekia-utama.66182" target="_blank" rel="noopener noreferrer" 
+                           class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition shadow">
+                            <i class="fa-solid fa-cart-shopping"></i> Beli di SIPLah
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterProducts(cat) {
+            document.querySelectorAll('.prod-filter-btn').forEach(b => {
+                b.classList.remove('active', 'bg-mandala-blue', 'text-white', 'shadow');
+                b.classList.add('bg-white', 'text-slate-600');
+            });
+            event.target.classList.add('active', 'bg-mandala-blue', 'text-white', 'shadow');
+            event.target.classList.remove('bg-white', 'text-slate-600');
+            renderProducts(cat);
+        }
+
+        function renderGallery() {
+            const container = document.getElementById('galleryGrid');
+            container.innerHTML = '';
+
+            galleryData.forEach(g => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden shadow-sm space-y-2 group";
+                card.innerHTML = `
+                    <div class="h-48 overflow-hidden bg-slate-200">
+                        <img src="${g.image}" alt="${g.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x300/0d47a1/ffffff?text=Dokumentasi+MCU'">
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-slate-900 text-xs">${g.title}</h4>
+                        <p class="text-[11px] text-slate-500 mt-1">${g.desc}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const pass = document.getElementById('loginPassword').value.trim();
+
+            if (pass === 'mandala cendekia') {
+                currentUserRole = 'admin';
+                localStorage.setItem('mcu_auth_role', 'admin');
+                closeLoginModal();
+                showToast('Berhasil Login sebagai Administrator!');
+                updateAuthUI();
+                openAdminModal();
+            } else {
+                showToast('Kata sandi admin salah! (Gunakan: mandala cendekia)', true);
+            }
+        }
+
+        function checkSavedAuth() {
+            const saved = localStorage.getItem('mcu_auth_role');
+            if (saved === 'admin') {
+                currentUserRole = 'admin';
+                updateAuthUI();
+            } else {
+                localStorage.removeItem('mcu_auth_role');
+            }
+        }
+
+        function updateAuthUI() {
+            const navText = document.getElementById('authBtnText');
+            const adminBadge = document.getElementById('adminBadge');
+
+            if (currentUserRole === 'admin') {
+                navText.textContent = "Status: Admin";
+                adminBadge.classList.remove('hidden');
+            } else {
+                navText.textContent = "Masuk Admin";
+                adminBadge.classList.add('hidden');
+            }
+        }
+
+        function handleLogout() {
+            currentUserRole = null;
+            localStorage.removeItem('mcu_auth_role');
+            updateAuthUI();
+            closeAdminModal();
+            showToast('Anda telah keluar dari sistem.');
+        }
+
+        function openAdminModal() {
+            if (currentUserRole !== 'admin') {
+                showToast('Akses ditolak! Login sebagai Admin terlebih dahulu.', true);
+                openLoginModal();
+                return;
+            }
+            document.getElementById('adminModal').classList.remove('hidden');
+            renderAdminProductTable();
+            renderAdminGalleryGrid();
+            renderAdminInquiries();
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-mandala-blue', 'text-white', 'shadow');
+                btn.classList.add('text-slate-700');
+            });
+            document.getElementById(`tabBtn-${tabName}`).classList.add('bg-mandala-blue', 'text-white', 'shadow');
+
+            document.querySelectorAll('[id^="adminTab-"]').forEach(t => t.classList.add('hidden'));
+            document.getElementById(`adminTab-${tabName}`).classList.remove('hidden');
+        }
+
+        function renderAdminVisitorTable() {
+            const tbody = document.getElementById('adminVisitorTableBody');
+            tbody.innerHTML = '';
+            visitorLogs.forEach(v => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-3 font-mono font-bold text-amber-600">${v.id}</td>
+                    <td class="p-3 font-mono">${v.ip}</td>
+                    <td class="p-3">${v.date}</td>
+                    <td class="p-3 text-slate-500">${v.device}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function clearVisitorLogs() {
+            visitorLogs = [];
+            localStorage.removeItem('mcu_visitor_logs');
+            localStorage.setItem('mcu_total_visitors', '0');
+            localStorage.setItem('mcu_today_visitors', '0');
+            initVisitorCounter();
+            showToast('Log Kunjungan berhasil direset.');
+        }
+
+        function renderAdminProductTable() {
+            const tbody = document.getElementById('adminProductTableBody');
+            tbody.innerHTML = '';
+            productsData.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-3 font-bold">#${p.id}</td>
+                    <td class="p-3 font-semibold text-slate-800">${p.name}</td>
+                    <td class="p-3"><span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded">KBLI ${p.category}</span></td>
+                    <td class="p-3 font-mono">${p.price}</td>
+                    <td class="p-3 text-emerald-600 font-semibold">Aktif (SIPLah)</td>
+                    <td class="p-3 text-right space-x-1">
+                        <button onclick="editProduct(${p.id})" class="text-indigo-600 hover:text-indigo-800 p-1 font-bold"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteProduct(${p.id})" class="text-rose-600 hover:text-rose-800 p-1 font-bold"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function openAddProductModal() {
+            document.getElementById('productFormTitle').textContent = "Tambah Produk Baru";
+            document.getElementById('prodFormId').value = "";
+            document.getElementById('prodFormName').value = "";
+            document.getElementById('prodFormPrice').value = "";
+            document.getElementById('prodFormDesc').value = "";
+            document.getElementById('prodFormImage').value = "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400&auto=format&fit=crop";
+            document.getElementById('productFormModal').classList.remove('hidden');
+        }
+
+        function closeProductFormModal() {
+            document.getElementById('productFormModal').classList.add('hidden');
+        }
+
+        function handleProductFormSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('prodFormId').value;
+            const name = document.getElementById('prodFormName').value;
+            const cat = document.getElementById('prodFormCategory').value;
+            const price = document.getElementById('prodFormPrice').value;
+            const desc = document.getElementById('prodFormDesc').value;
+            const img = document.getElementById('prodFormImage').value;
+
+            if (id) {
+                // Edit
+                const idx = productsData.findIndex(p => p.id == id);
+                if (idx !== -1) {
+                    productsData[idx] = { id: parseInt(id), name, category: cat, price, desc, image: img };
+                }
+            } else {
+                // Add
+                const newId = productsData.length ? Math.max(...productsData.map(p => p.id)) + 1 : 1;
+                productsData.push({ id: newId, name, category: cat, price, desc, image: img });
+            }
+
+            closeProductFormModal();
+            renderProducts('all');
+            renderAdminProductTable();
+            showToast('Data produk berhasil disimpan!');
+        }
+
+        function editProduct(id) {
+            const p = productsData.find(item => item.id === id);
+            if (!p) return;
+            document.getElementById('productFormTitle').textContent = "Edit Produk";
+            document.getElementById('prodFormId').value = p.id;
+            document.getElementById('prodFormName').value = p.name;
+            document.getElementById('prodFormCategory').value = p.category;
+            document.getElementById('prodFormPrice').value = p.price;
+            document.getElementById('prodFormDesc').value = p.desc;
+            document.getElementById('prodFormImage').value = p.image;
+            document.getElementById('productFormModal').classList.remove('hidden');
+        }
+
+        function deleteProduct(id) {
+            productsData = productsData.filter(p => p.id !== id);
+            renderProducts('all');
+            renderAdminProductTable();
+            showToast('Produk telah dihapus.');
+        }
+
+        function renderAdminGalleryGrid() {
+            const container = document.getElementById('adminGalleryGrid');
+            container.innerHTML = '';
+            galleryData.forEach(g => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border rounded-xl p-3 text-xs space-y-2 relative";
+                card.innerHTML = `
+                    <img src="${g.image}" class="w-full h-32 object-cover rounded-lg">
+                    <h5 class="font-bold text-slate-800">${g.title}</h5>
+                    <p class="text-[11px] text-slate-500">${g.desc}</p>
+                    <button onclick="deleteGallery(${g.id})" class="w-full bg-rose-100 text-rose-700 py-1 rounded font-bold hover:bg-rose-200">Hapus Foto</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function openAddGalleryModal() {
+            const title = prompt("Masukkan Judul Foto Galeri:");
+            if (!title) return;
+            const desc = prompt("Masukkan Keterangan Foto:");
+            const newId = galleryData.length ? Math.max(...galleryData.map(g => g.id)) + 1 : 1;
+            galleryData.push({
+                id: newId,
+                title,
+                desc: desc || "Dokumentasi kegiatan usaha.",
+                image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=400&auto=format&fit=crop"
+            });
+            renderGallery();
+            renderAdminGalleryGrid();
+            showToast('Foto galeri berhasil ditambahkan!');
+        }
+
+        function deleteGallery(id) {
+            galleryData = galleryData.filter(g => g.id !== id);
+            renderGallery();
+            renderAdminGalleryGrid();
+            showToast('Foto galeri dihapus.');
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const phone = document.getElementById('contactPhone').value;
+            const category = document.getElementById('contactCategory').value;
+            const message = document.getElementById('contactMessage').value;
+
+            const newInquiry = {
+                id: 'INQ-' + Date.now().toString().slice(-4),
+                name, phone, category, message, date: new Date().toLocaleString('id-ID')
+            };
+
+            inquiryLogs.unshift(newInquiry);
+            document.getElementById('contactForm').reset();
+            showToast('Pesan Anda berhasil dikirim! Kami akan menghubungi Anda kembali.');
+            renderAdminInquiries();
+        }
+
+        function renderAdminInquiries() {
+            const container = document.getElementById('adminInquiriesList');
+            if (inquiryLogs.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-6">Belum ada pesan masuk dari pengunjung.</p>`;
+                return;
+            }
+            container.innerHTML = '';
+            inquiryLogs.forEach(i => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border rounded-xl p-4 text-xs space-y-1";
+                card.innerHTML = `
+                    <div class="flex justify-between font-bold text-slate-800">
+                        <span>${i.name} (${i.phone})</span>
+                        <span class="text-slate-400 font-normal">${i.date}</span>
+                    </div>
+                    <span class="inline-block bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-[10px] font-bold">${i.category}</span>
+                    <p class="text-slate-600 mt-2">${i.message}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function showDiagramModal(type) {
+            const modal = document.getElementById('diagramModal');
+            const title = document.getElementById('diagramModalTitle');
+            const content = document.getElementById('diagramModalContent');
+
+            if (type === 'dfd0') {
+                title.textContent = "DFD Level 0 (Diagram Konteks)";
+                content.innerHTML = `
+                    <div class="text-xs space-y-4 text-slate-700">
+                        <p><strong>Deskripsi:</strong> Menggambarkan alur data tingkat tinggi antara Entitas Admin, Entitas User (Pengunjung), Sistem Website, dan Database.</p>
+                        <div class="bg-white p-4 rounded-xl border border-slate-300 text-center font-mono space-y-3">
+                            <div class="flex justify-around items-center">
+                                <div class="p-3 bg-blue-100 border-2 border-blue-600 rounded-lg font-bold">[ADMIN]</div>
+                                <div class="p-4 bg-amber-100 border-2 border-amber-600 rounded-full font-bold">(0.0 SISTEM WEBSITE COMPANY PROFILE)</div>
+                                <div class="p-3 bg-emerald-100 border-2 border-emerald-600 rounded-lg font-bold">[USER / PENGUNJUNG]</div>
+                            </div>
+                            <div class="p-3 bg-slate-200 border border-slate-400 rounded-lg w-1/2 mx-auto font-bold">[(D1) DATABASE PT MANDALA CENDEKIA]</div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'dfd1') {
+                title.textContent = "DFD Level 1 (Prosedur Pengolahan Data)";
+                content.innerHTML = `
+                    <div class="text-xs space-y-3 text-slate-700">
+                        <p><strong>Proses Utama:</strong> 1.0 Login Admin | 2.0 Kelola Produk | 3.0 Lihat Produk | 4.0 Beli Produk (Redirect SIPLah Tokoladang)</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><strong>1.0 Login Admin:</strong> Verifikasi password 'mandala cendekia'.</li>
+                            <li><strong>2.0 Kelola Produk:</strong> Simpan/Edit/Hapus data ke D1 Tabel Produk.</li>
+                            <li><strong>3.0 Lihat Produk:</strong> Mengambil data dari D1 Tabel Produk ke User.</li>
+                            <li><strong>4.0 Beli Produk:</strong> Mengalihkan pengguna ke URL marketplace SIPLah Tokoladang.</li>
+                        </ul>
+                    </div>
+                `;
+            } else if (type === 'erd') {
+                title.textContent = "Entity Relationship Diagram (ERD)";
+                content.innerHTML = `
+                    <div class="text-xs space-y-3 text-slate-700">
+                        <p><strong>Entitas & Atribut Database:</strong></p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono">
+                            <div class="p-3 bg-white border rounded-lg">
+                                <strong class="text-mandala-blue">Tabel Admin/User</strong>
+                                <p class="text-[11px] text-slate-500">id_user (PK), username, password, role</p>
+                            </div>
+                            <div class="p-3 bg-white border rounded-lg">
+                                <strong class="text-mandala-blue">Tabel Produk</strong>
+                                <p class="text-[11px] text-slate-500">id_produk (PK), nama_produk, deskripsi, gambar, link_beli, id_user (FK)</p>
+                            </div>
+                            <div class="p-3 bg-white border rounded-lg">
+                                <strong class="text-mandala-blue">Tabel Galeri</strong>
+                                <p class="text-[11px] text-slate-500">id_galeri (PK), judul, gambar, keterangan, id_user (FK)</p>
+                            </div>
+                            <div class="p-3 bg-white border rounded-lg">
+                                <strong class="text-mandala-blue">Tabel Visitor</strong>
+                                <p class="text-[11px] text-slate-500">id_visitor (PK), ip_address, tanggal</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            modal.classList.remove('hidden');
+        }
+
+        function closeDiagramModal() {
+            document.getElementById('diagramModal').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toastNotification');
+            const messageEl = document.getElementById('toastMessage');
+            const iconEl = document.getElementById('toastIcon');
+
+            messageEl.textContent = msg;
+            if (isError) {
+                iconEl.className = "fa-solid fa-circle-xmark text-rose-400 text-lg";
+            } else {
+                iconEl.className = "fa-solid fa-circle-check text-emerald-400 text-lg";
+            }
+
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
